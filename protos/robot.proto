@@ -1,0 +1,384 @@
+#VRML_SIM R2023b utf8
+# license: Apache License 2.0
+# license url: http://www.apache.org/licenses/LICENSE-2.0
+# This is a proto file for Webots for the ASM0307.SLDASM
+# Extracted from: Z:/LikeAscento/URDF_ASM0307.SLDASM/urdf/ASM0307.SLDASM.urdf
+
+PROTO robot [
+  field  SFVec3f     translation     0 0 0
+  field  SFRotation  rotation        0 0 1 0
+  field  SFString    name            "robot"  # Is `Robot.name`.
+  field  SFString    controller      "void"            # Is `Robot.controller`.
+  field  MFString    controllerArgs  []                # Is `Robot.controllerArgs`.
+  field  SFString    customData      ""                # Is `Robot.customData`.
+  field  SFBool      supervisor      FALSE             # Is `Robot.supervisor`.
+  field  SFBool      synchronization TRUE              # Is `Robot.synchronization`.
+  field  SFBool      selfCollision   FALSE             # Is `Robot.selfCollision`.
+]
+{
+  Robot {
+    translation IS translation
+    rotation IS rotation
+    controller IS controller
+    controllerArgs IS controllerArgs
+    customData IS customData
+    supervisor IS supervisor
+    synchronization IS synchronization
+    selfCollision IS selfCollision
+    children [
+        InertialUnit {
+          translation 0.1 0 0
+          name "imu"
+        }
+        #ADD Accelerometer
+        Accelerometer{
+          translation 0.1 0 0
+          name "accl"        
+        }
+        Gyro{
+          translation 0.1 0 0
+          name "gyro"
+        }
+      Shape {
+        appearance DEF base_link_material PBRAppearance {
+          roughness 1.000000
+          metalness 0
+        }
+        geometry DEF base_link Mesh {
+          url "ASM0307.SLDASM/meshes/base_link.STL"
+        }
+      }
+      HingeJoint {
+        jointParameters HingeJointParameters {
+          axis 0.000000 -1.000000 0.000000
+          anchor 0.000000 -0.325000 0.000000
+        }
+        device [
+          RotationalMotor {
+            name "joint_right_motor_2"
+            maxTorque 10000
+          }
+          PositionSensor {
+            name "joint_right_motor_2_sensor"
+          }
+        ]
+        endPoint Solid {
+          translation 0.000000 -0.325000 0.000000
+          children [
+            Shape {
+              appearance DEF right_motor_2_material PBRAppearance {
+                roughness 1.000000
+                metalness 0
+              }
+              geometry DEF right_motor_2 Mesh {
+                url "ASM0307.SLDASM/meshes/right_motor_2.STL"
+              }
+            }
+            HingeJoint {
+              jointParameters HingeJointParameters {
+                axis 0.000000 -1.000000 0.000000
+                anchor -0.205998 -0.020000 -0.000942
+              }
+              device [
+                RotationalMotor {
+                  name "joint_right_wheel_bar"
+                  maxTorque 10000
+                }
+                PositionSensor {
+                  name "joint_right_wheel_bar_sensor"
+                }
+              ]
+              endPoint Solid {
+                translation -0.205998 -0.020000 -0.000942
+                children [
+                  Shape {
+                    appearance DEF right_wheel_bar_material PBRAppearance {
+                      roughness 1.000000
+                      metalness 0
+                    }
+                    geometry DEF right_wheel_bar Mesh {
+                      url "ASM0307.SLDASM/meshes/right_wheel_bar.STL"
+                    }
+                  }
+                  HingeJoint {
+                    jointParameters HingeJointParameters {
+                      axis 0.000000 -1.000000 0.000000
+                      anchor 0.194481 0.005000 -0.325519
+                    }
+                    device [
+                      RotationalMotor {
+                        name "joint_right_wheel"
+                        maxTorque 10000
+                      }
+                      PositionSensor {
+                        name "joint_right_wheel_sensor"
+                      }
+                    ]
+                    endPoint Solid {
+                      translation 0.194481 0.005000 -0.325519
+                      children [
+                        Shape {
+                          appearance DEF right_wheel_material PBRAppearance {
+                            roughness 1.000000
+                            metalness 0
+                          }
+                          geometry DEF right_wheel Mesh {
+                            url "ASM0307.SLDASM/meshes/right_wheel.STL"
+                          }
+                        }
+                      ]
+                      name "right_wheel"
+                      boundingObject USE right_wheel
+                      physics Physics {
+                        density -1
+                        mass 2.949400
+                        centerOfMass [ -0.000001 0.064926 -0.000943 ]
+                        inertiaMatrix [
+                          8.622827e-03 1.628606e-02 8.622827e-03
+                          3.079256e-20 1.411214e-19 4.658343e-19
+                        ]
+                      }
+                    }
+                  }
+                ]
+                name "right_wheel_bar"
+                boundingObject USE right_wheel_bar
+                physics Physics {
+                  density -1
+                  mass 0.059356
+                  centerOfMass [ 0.097612 0.002500 -0.163856 ]
+                  inertiaMatrix [
+                    5.837008e-04 7.935598e-04 2.101064e-04
+                    1.111271e-21 3.449879e-04 -5.795381e-22
+                  ]
+                }
+              }
+            }
+          ]
+          name "right_motor_2"
+          boundingObject USE right_motor_2
+          physics Physics {
+            density -1
+            mass 0.033649
+            centerOfMass [ -0.102999 0.002500 -0.000471 ]
+            inertiaMatrix [
+              2.584438e-06 1.457760e-04 1.433318e-04
+              -1.189072e-22 -6.433709e-07 -1.779746e-23
+            ]
+          }
+        }
+      }
+      HingeJoint {
+        jointParameters HingeJointParameters {
+          axis 0.000000 -1.000000 0.000000
+          anchor 0.129944 -0.320000 -0.068728
+        }
+        device [
+          RotationalMotor {
+            name "joint_right_bar"
+            maxTorque 10000
+          }
+          PositionSensor {
+            name "joint_right_bar_sensor"
+          }
+        ]
+        endPoint Solid {
+          translation 0.129944 -0.320000 -0.068728
+          children [
+            Shape {
+              appearance DEF right_bar_material PBRAppearance {
+                roughness 1.000000
+                metalness 0
+              }
+              geometry DEF right_bar Mesh {
+                url "ASM0307.SLDASM/meshes/right_bar.STL"
+              }
+            }
+          ]
+          name "right_bar"
+          boundingObject USE right_bar
+          physics Physics {
+            density -1
+            mass 0.046999
+            centerOfMass [ -0.147499 -0.002500 -0.000471 ]
+            inertiaMatrix [
+              3.614475e-06 3.910543e-04 3.876357e-04
+              -5.033173e-22 -1.226289e-06 1.564129e-23
+            ]
+          }
+        }
+      }
+      HingeJoint {
+        jointParameters HingeJointParameters {
+          axis 0.000000 -1.000000 0.000000
+          anchor 0.000000 0.325000 0.000000
+        }
+        device [
+          RotationalMotor {
+            name "joint_left_motor_2"
+            maxTorque 10000
+          }
+          PositionSensor {
+            name "joint_left_motor_2_sensor"
+          }
+        ]
+        endPoint Solid {
+          translation 0.000000 0.325000 0.000000
+          children [
+            Shape {
+              appearance DEF left_motor_2_material PBRAppearance {
+                roughness 1.000000
+                metalness 0
+              }
+              geometry DEF left_motor_2 Mesh {
+                url "ASM0307.SLDASM/meshes/left_motor_2.STL"
+              }
+            }
+            HingeJoint {
+              jointParameters HingeJointParameters {
+                axis 0.000000 -1.000000 0.000000
+                anchor -0.206000 0.020000 0.000000
+              }
+              device [
+                RotationalMotor {
+                  name "joint_left_wheel_bar"
+                  maxTorque 10000
+                }
+                PositionSensor {
+                  name "joint_left_wheel_bar_sensor"
+                }
+              ]
+              endPoint Solid {
+                translation -0.206000 0.020000 0.000000
+                children [
+                  Shape {
+                    appearance DEF left_wheel_bar_material PBRAppearance {
+                      roughness 1.000000
+                      metalness 0
+                    }
+                    geometry DEF left_wheel_bar Mesh {
+                      url "ASM0307.SLDASM/meshes/left_wheel_bar.STL"
+                    }
+                  }
+                  HingeJoint {
+                    jointParameters HingeJointParameters {
+                      axis 0.000000 1.000000 0.000000
+                      anchor 0.194483 -0.045000 -0.326460
+                    }
+                    device [
+                      RotationalMotor {
+                        name "joint_left_wheel"
+                        maxTorque 10000
+                      }
+                      PositionSensor {
+                        name "joint_left_wheel_sensor"
+                      }
+                    ]
+                    endPoint Solid {
+                      translation 0.194483 -0.045000 -0.326460
+                      children [
+                        Shape {
+                          appearance DEF left_wheel_material PBRAppearance {
+                            roughness 1.000000
+                            metalness 0
+                          }
+                          geometry DEF left_wheel Mesh {
+                            url "ASM0307.SLDASM/meshes/left_wheel.STL"
+                          }
+                        }
+                      ]
+                      name "left_wheel"
+                      boundingObject USE left_wheel
+                      physics Physics {
+                        density -1
+                        mass 2.94940
+                        centerOfMass [ -0.000000 -0.024926 -0.000000 ]
+                        inertiaMatrix [
+                          8.622827e-03 1.628606e-02 8.622827e-03
+                          1.092692e-19 -2.385963e-20 -3.329179e-21
+                        ]
+                      }
+                    }
+                  }
+                ]
+                name "left_wheel_bar"
+                boundingObject USE left_wheel_bar
+                physics Physics {
+                  density -1
+                  mass 0.059356
+                  centerOfMass [ 0.097614 -0.002500 -0.163855 ]
+                  inertiaMatrix [
+                    5.836943e-04 7.935598e-04 2.101129e-04
+                    -4.110030e-22 3.449915e-04 -3.034988e-22
+                  ]
+                }
+              }
+            }
+          ]
+          name "left_motor_2"
+          boundingObject USE left_motor_2
+          physics Physics {
+            density -1
+            mass 0.033649
+            centerOfMass [ -0.103000 -0.002500 -0.000000 ]
+            inertiaMatrix [
+              2.581497e-06 1.457760e-04 1.433347e-04
+              1.863741e-23 -8.514357e-23 -4.507825e-23
+            ]
+          }
+        }
+      }
+      HingeJoint {
+        jointParameters HingeJointParameters {
+          axis 0.000000 -1.000000 0.000000
+          anchor 0.129944 0.325000 -0.068728
+        }
+        device [
+          RotationalMotor {
+            name "joint_left_bar"
+            maxTorque 10000
+          }
+          PositionSensor {
+            name "joint_left_bar_sensor"
+          }
+        ]
+        endPoint Solid {
+          translation 0.129944 0.325000 -0.068728
+          children [
+            Shape {
+              appearance DEF left_bar_material PBRAppearance {
+                roughness 1.000000
+                metalness 0
+              }
+              geometry DEF left_bar Mesh {
+                url "ASM0307.SLDASM/meshes/left_bar.STL"
+              }
+            }
+          ]
+          name "left_bar"
+          boundingObject USE left_bar
+          physics Physics {
+            density -1
+            mass 0.046999
+            centerOfMass [ -0.147500 -0.002500 0.000000 ]
+            inertiaMatrix [
+              3.610560e-06 3.910543e-04 3.876396e-04
+              1.749234e-22 1.091415e-19 1.489083e-23
+            ]
+          }
+        }
+      }
+    ]
+    name IS name
+    boundingObject USE base_link
+    physics Physics {
+      density -1
+      mass 11.639000
+      centerOfMass [ 0.000035 0.000000 -0.000018 ]
+      inertiaMatrix [
+        3.551260e+00 2.556024e+00 4.534364e+00
+        -2.220446e-16 4.646277e-05 1.746752e-16
+      ]
+    }
+  }
+}

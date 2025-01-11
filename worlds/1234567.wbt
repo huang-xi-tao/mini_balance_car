@@ -1,0 +1,646 @@
+#VRML_SIM R2023a utf8
+
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/backgrounds/protos/TexturedBackground.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/backgrounds/protos/TexturedBackgroundLight.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/floors/protos/RectangleArena.proto"
+
+WorldInfo {
+  basicTimeStep 5
+}
+Viewpoint {
+  orientation 0.049913018366050686 0.05143332758014827 -0.997428345001095 1.5433702320880207
+  position 1.8703571314013798 10.228945466550181 2.1125616319475315
+  follow "robot"
+}
+TexturedBackground {
+}
+TexturedBackgroundLight {
+}
+RectangleArena {
+  floorSize 100 100
+}
+Solid {
+  translation 1.73 1.21 -0.44
+  children [
+    DEF BOX Shape {
+      appearance Appearance {
+        material Material {
+          diffuseColor 0 0.666667 1
+        }
+      }
+      geometry Box {
+        size 1 0.3 0.5
+      }
+    }
+  ]
+  boundingObject USE BOX
+}
+Robot {
+  translation 0.0462133 0 0.445487
+  rotation 0 -1 0 0
+  children [
+    InertialUnit {
+      translation 0.1 0 0
+      name "imu"
+    }
+    Accelerometer {
+      translation 0.1 0 0
+      name "accl"
+    }
+    Gyro {
+      translation 0.1 0 0
+    }
+    Shape {
+      appearance DEF base_link_material PBRAppearance {
+        baseColor 0 1 0
+        roughness 1
+        metalness 0
+      }
+      geometry DEF base_link Mesh {
+        url [
+          "../protos/ASM0307.SLDASM/meshes/base_link.STL"
+        ]
+      }
+    }
+    HingeJoint {
+      jointParameters HingeJointParameters {
+        axis 0 -1 0
+        anchor 0 -0.325 0
+      }
+      endPoint Solid {
+        translation 0 -0.325 0
+        rotation 0.8661867545428542 -0.0007443411456316709 -0.4997198737400547 0.0007294500543811555
+        children [
+          Shape {
+            appearance DEF right_motor_2_material PBRAppearance {
+              baseColor 0.666667 0 0
+              roughness 1
+              metalness 0
+            }
+            geometry DEF right_motor_2 Mesh {
+              url [
+                "../protos/ASM0307.SLDASM/meshes/right_motor_2.STL"
+              ]
+            }
+          }
+          HingeJoint {
+            jointParameters HingeJointParameters {
+              axis 0 -1 0
+              anchor -0.205998 -0.02 0
+            }
+            endPoint Solid {
+              translation -0.205998 -0.02 -0.0009420000000000782
+              rotation 0 -1 0 0
+              children [
+                Shape {
+                  appearance DEF right_wheel_bar_material PBRAppearance {
+                    baseColor 0.666667 0 0
+                    roughness 1
+                    metalness 0
+                  }
+                  geometry DEF right_wheel_bar Mesh {
+                    url [
+                      "../protos/ASM0307.SLDASM/meshes/right_wheel_bar.STL"
+                    ]
+                  }
+                }
+                HingeJoint {
+                  jointParameters HingeJointParameters {
+                    axis 0 1 0
+                    anchor 0.194481 0.005 -0.325519
+                  }
+                  device [
+                    RotationalMotor {
+                      name "joint_right_wheel"
+                      maxVelocity 1000
+                      maxTorque 10000
+                    }
+                    PositionSensor {
+                      name "joint_right_wheel_sensor"
+                    }
+                  ]
+                  endPoint Solid {
+                    translation 0.194481 0.005 -0.325519
+                    rotation 0 1 0 0
+                    children [
+                      Shape {
+                        appearance DEF right_wheel_material PBRAppearance {
+                          baseColor 1 0.666667 0
+                          roughness 1
+                          metalness 0
+                        }
+                        geometry DEF right_wheel Mesh {
+                          url [
+                            "../protos/ASM0307.SLDASM/meshes/right_wheel.STL"
+                          ]
+                        }
+                      }
+                    ]
+                    name "right_wheel"
+                    boundingObject Transform {
+                      translation 0 0.065 2.57124e-07
+                      rotation 1 0 0 1.5708
+                      children [
+                        Cylinder {
+                          height 0.05
+                          radius 0.12
+                        }
+                      ]
+                    }
+                    physics Physics {
+                      density -1
+                      mass 4
+                      centerOfMass [
+                        -1e-06 0.064926 -0.000943
+                      ]
+                    }
+                  }
+                }
+              ]
+              name "right_wheel_bar"
+              boundingObject Transform {
+                translation 0.095 0 -0.164546
+                rotation 0 1 0 1.0471986938995748
+                children [
+                  Box {
+                    size 0.4 0.01 0.03
+                  }
+                ]
+              }
+              physics Physics {
+                density -1
+                mass 0.059356
+                centerOfMass [
+                  0.097612 0.0025 -0.163856
+                ]
+                inertiaMatrix [
+                  0.0005837008 0.0007935598 0.0002101064
+                  1.111271e-21 0.0003449879 -5.795381e-22
+                ]
+              }
+            }
+          }
+        ]
+        name "right_motor_2"
+        boundingObject Transform {
+          translation -0.105 0 0
+          children [
+            Box {
+              size 0.21 0.01 0.03
+            }
+          ]
+        }
+        physics Physics {
+          density -1
+          mass 0.033649
+          centerOfMass [
+            -0.102999 0.0025 -0.000471
+          ]
+          inertiaMatrix [
+            2.584438e-06 0.000145776 0.0001433318
+            -1.189072e-22 -6.433709e-07 -1.779746e-23
+          ]
+        }
+      }
+    }
+    HingeJoint {
+      jointParameters HingeJointParameters {
+        axis 0 1 0
+        anchor 0.129944 -0.32 -0.068728
+      }
+      device [
+        RotationalMotor {
+          name "joint_right_bar"
+          maxTorque 150
+        }
+        PositionSensor {
+          name "joint_right_bar_sensor"
+        }
+      ]
+      endPoint Solid {
+        translation 0.129944 -0.32 -0.068728
+        rotation 0.7104099626618272 0.00047002397561449026 0.7037879396723731 0.0005177514176432189
+        children [
+          HingeJoint {
+            jointParameters HingeJointParameters {
+              axis 0 1 0
+              anchor -0.3 -0.02 0
+            }
+            endPoint SolidReference {
+              solidName "right_wheel_bar"
+            }
+          }
+          Shape {
+            appearance DEF right_bar_material PBRAppearance {
+              baseColor 0.666667 0 0
+              roughness 1
+              metalness 0
+            }
+            geometry DEF right_bar Mesh {
+              url [
+                "../protos/ASM0307.SLDASM/meshes/right_bar.STL"
+              ]
+            }
+          }
+        ]
+        name "right_bar"
+        boundingObject Transform {
+          translation -0.15 0 0
+          children [
+            Box {
+              size 0.3 0.01 0.03
+            }
+          ]
+        }
+        physics Physics {
+          density -1
+          mass 0.046999
+          centerOfMass [
+            -0.147499 -0.0025 -0.000471
+          ]
+          inertiaMatrix [
+            3.614475e-06 0.0003910543 0.0003876357
+            -5.033173e-22 -1.226289e-06 1.564129e-23
+          ]
+        }
+      }
+    }
+    HingeJoint {
+      jointParameters HingeJointParameters {
+        axis 0 -1 0
+        anchor 0 0.325 0
+      }
+      endPoint Solid {
+        translation 0 0.325 0
+        rotation -0.9040340419776157 -0.0012306997207387177 0.42745869545935306 0.0007064311568880253
+        children [
+          Shape {
+            appearance DEF left_motor_2_material PBRAppearance {
+              baseColor 0.666667 0 0
+              roughness 1
+              metalness 0
+            }
+            geometry DEF left_motor_2 Mesh {
+              url [
+                "../protos/ASM0307.SLDASM/meshes/left_motor_2.STL"
+              ]
+            }
+          }
+          HingeJoint {
+            jointParameters HingeJointParameters {
+              axis 0 -1 0
+              anchor -0.206 0.02 0
+            }
+            endPoint Solid {
+              translation -0.206 0.02 0
+              rotation 0 -1 0 0
+              children [
+                Shape {
+                  appearance DEF left_wheel_bar_material PBRAppearance {
+                    baseColor 0.666667 0 0
+                    roughness 1
+                    metalness 0
+                  }
+                  geometry DEF left_wheel_bar Mesh {
+                    url [
+                      "../protos/ASM0307.SLDASM/meshes/left_wheel_bar.STL"
+                    ]
+                  }
+                }
+                HingeJoint {
+                  jointParameters HingeJointParameters {
+                    axis 0 1 0
+                    anchor 0.194483 -0.045 -0.32646
+                  }
+                  device [
+                    RotationalMotor {
+                      name "joint_left_wheel"
+                      maxVelocity 1000
+                      maxTorque 10000
+                    }
+                    PositionSensor {
+                      name "joint_left_wheel_sensor"
+                    }
+                  ]
+                  endPoint Solid {
+                    translation 0.194483 -0.045 -0.32646
+                    rotation 0 1 0 0
+                    children [
+                      Shape {
+                        appearance DEF left_wheel_material PBRAppearance {
+                          baseColor 1 0.666667 0
+                          roughness 1
+                          metalness 0
+                        }
+                        geometry DEF left_wheel Mesh {
+                          url [
+                            "../protos/ASM0307.SLDASM/meshes/left_wheel.STL"
+                          ]
+                        }
+                      }
+                    ]
+                    name "left_wheel"
+                    boundingObject Transform {
+                      translation 0 -0.025 4.04052e-07
+                      rotation 1 0 0 1.5708
+                      children [
+                        Cylinder {
+                          height 0.05
+                          radius 0.12
+                        }
+                      ]
+                    }
+                    physics Physics {
+                      density -1
+                      mass 4
+                      centerOfMass [
+                        0 -0.024926 0
+                      ]
+                      inertiaMatrix [
+                        0.008622827 0.01628606 0.008622827
+                        1.092692e-19 -2.385963e-20 -3.329179e-21
+                      ]
+                    }
+                  }
+                }
+              ]
+              name "left_wheel_bar"
+              boundingObject Transform {
+                translation 0.0961818 0 -0.163856
+                rotation 0 1 0 1.04
+                children [
+                  Box {
+                    size 0.4 0.01 0.03
+                  }
+                ]
+              }
+              physics Physics {
+                density -1
+                mass 0.059356
+                centerOfMass [
+                  0.097614 -0.0025 -0.163855
+                ]
+                inertiaMatrix [
+                  0.0005836943 0.0007935598 0.0002101129
+                  -4.11003e-22 0.0003449915 -3.034988e-22
+                ]
+              }
+            }
+          }
+        ]
+        name "left_motor_2"
+        boundingObject Transform {
+          translation -0.105 0 0
+          children [
+            Box {
+              size 0.22 0.01 0.03
+            }
+          ]
+        }
+        physics Physics {
+          density -1
+          mass 0.033649
+          centerOfMass [
+            -0.103 -0.0025 0
+          ]
+          inertiaMatrix [
+            2.581497e-06 0.000145776 0.0001433347
+            1.863741e-23 -8.514357e-23 -4.507825e-23
+          ]
+        }
+      }
+    }
+    HingeJoint {
+      jointParameters HingeJointParameters {
+        axis 0 1 0
+        anchor 0.129944 0.325 -0.068728
+      }
+      device [
+        RotationalMotor {
+          name "joint_left_bar"
+          maxTorque 150
+        }
+        PositionSensor {
+          name "joint_left_bar_sensor"
+        }
+      ]
+      endPoint Solid {
+        translation 0.129944 0.325 -0.068728
+        rotation -0.7253946619909326 -0.00021324744604304008 -0.6883331598002433 0.0005537424360383521
+        children [
+          HingeJoint {
+            jointParameters HingeJointParameters {
+              axis 0 1 0
+              anchor -0.3 0.02 0
+            }
+            endPoint SolidReference {
+              solidName "left_wheel_bar"
+            }
+          }
+          Shape {
+            appearance DEF left_bar_material PBRAppearance {
+              baseColor 0.666667 0 0
+              roughness 1
+              metalness 0
+            }
+            geometry DEF left_bar Mesh {
+              url [
+                "../protos/ASM0307.SLDASM/meshes/left_bar.STL"
+              ]
+            }
+          }
+        ]
+        name "left_bar"
+        boundingObject Transform {
+          translation -0.15 0 0
+          children [
+            Box {
+              size 0.3 0.01 0.03
+            }
+          ]
+        }
+        physics Physics {
+          density -1
+          mass 0.046999
+          centerOfMass [
+            -0.1475 -0.0025 0
+          ]
+          inertiaMatrix [
+            3.61056e-06 0.0003910543 0.0003876396
+            1.749234e-22 1.091415e-19 1.489083e-23
+          ]
+        }
+      }
+    }
+    DEF Tail HingeJoint {
+      jointParameters HingeJointParameters {
+        position -2.8
+        axis 0 1 0
+        anchor 0.1 0 -0.185
+      }
+      device [
+        RotationalMotor {
+          name "tail_motor"
+          maxTorque 10000
+        }
+        PositionSensor {
+          name "tail_motor_sensor"
+        }
+      ]
+      endPoint Solid {
+        translation 0.1 0 -0.185
+        rotation -7.770900969380842e-07 -0.9999999999977084 1.994848433836759e-06 2.799999998354041
+        children [
+          HingeJoint {
+            jointParameters HingeJointParameters {
+              axis 0 1 0
+              anchor -0.32 0 0
+            }
+            endPoint Solid {
+              translation -0.32 0 0
+              rotation 0 1 0 0
+              children [
+                DEF roller Transform {
+                  rotation 1 0 0 1.5707
+                  children [
+                    Shape {
+                      appearance Appearance {
+                        material Material {
+                          diffuseColor 0 0 0.498039
+                        }
+                      }
+                      geometry Cylinder {
+                        height 0.04
+                        radius 0.04
+                      }
+                    }
+                  ]
+                }
+              ]
+              boundingObject USE roller
+              physics Physics {
+                density -1
+                mass 2
+                centerOfMass [
+                  0 0 0
+                ]
+              }
+            }
+          }
+          DEF TAIL Group {
+            children [
+              DEF motor_Plate Transform {
+                rotation 1 0 0 1.5707
+                children [
+                  Shape {
+                    appearance Appearance {
+                      material Material {
+                        diffuseColor 0 0 0.498039
+                      }
+                    }
+                    geometry Cylinder {
+                      height 0.05
+                      radius 0.04
+                    }
+                  }
+                ]
+              }
+              DEF Tail Transform {
+                translation -0.16 0 0
+                children [
+                  Shape {
+                    appearance Appearance {
+                      material Material {
+                        diffuseColor 0 0 0.498039
+                      }
+                    }
+                    geometry Box {
+                      size 0.32 0.05 0.05
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+        boundingObject USE TAIL
+        physics Physics {
+          density -1
+          mass 3
+          centerOfMass [
+            -0.18 0 0
+          ]
+        }
+      }
+    }
+  ]
+  boundingObject Box {
+    size 0.48 0.6 0.32
+  }
+  physics Physics {
+    density -1
+    mass 30
+    centerOfMass [
+      0 0 0
+    ]
+  }
+  controller "<extern>"
+  supervisor TRUE
+}
+DEF Terrain Solid {
+  translation 3.77 0.24 0.07
+  children [
+    DEF Terrian Group {
+      children [
+        DEF 下坡 Transform {
+          translation 0.97244 0 -0.0588527
+          rotation 0 1 0 0.261795
+          children [
+            Shape {
+              appearance Appearance {
+                material Material {
+                  diffuseColor 1 0.333333 1
+                }
+              }
+              geometry Box {
+                size 1 0.5 0.01
+              }
+            }
+          ]
+        }
+        DEF 上坡 Transform {
+          translation -0.960748 0 -0.0481326
+          rotation 0 1 0 -0.261795307179586
+          children [
+            Shape {
+              appearance Appearance {
+                material Material {
+                  diffuseColor 1 0.333333 1
+                }
+              }
+              geometry Box {
+                size 1 0.5 0.01
+              }
+            }
+          ]
+        }
+        DEF 平面 Transform {
+          children [
+            Shape {
+              appearance Appearance {
+                material Material {
+                  diffuseColor 1 0.333333 1
+                }
+              }
+              geometry Box {
+                size 1 0.5 0.15
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+  name "solid(1)"
+  boundingObject USE Terrian
+}
